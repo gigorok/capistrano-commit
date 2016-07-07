@@ -1,0 +1,38 @@
+namespace :deploy do
+  namespace :commit do
+
+    desc <<-DESC
+      Save information about deployed revisions into database.
+    DESC
+    task :save do
+      on roles(fetch(:capistrano_commit_role, :app)) do |host|
+
+        invoke 'deploy:set_current_revision'
+        rev = fetch(:current_revision)
+
+        info "Host: #{host}, Revision: #{rev}"
+
+        within current_path do
+          with rails_env: fetch(:rails_env) do
+            execute :rake, 'capistrano:commit:save', "HOST=#{host}", "REVISION=#{rev}"
+          end
+        end
+
+      end
+    end
+
+    desc <<-DESC
+      Show information about deployed revisions.
+    DESC
+    task :show do
+      on roles(fetch(:capistrano_commit_role, :app)) do |host|
+
+        invoke 'deploy:set_current_revision'
+        rev = fetch(:current_revision)
+
+        info "Host: #{host}, Revision: #{rev}"
+      end
+    end
+
+  end
+end
