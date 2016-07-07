@@ -22,7 +22,7 @@ Add below to Capfile:
 
     require 'capistrano/commit/caps'
 
-and
+and to deploy.rb:
 
     after 'deploy:publishing', 'capistrano:commit:save'
 
