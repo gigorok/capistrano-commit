@@ -6,7 +6,7 @@ Save information about deployed revisions into database.
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-commit', require: false
+    gem 'capistrano-commit', github: 'gigorok/capistrano-commit'
 
 And then execute:
 
@@ -24,8 +24,7 @@ Add below to Capfile:
 
 and to deploy.rb:
 
-    after 'deploy:publishing', 'capistrano:commit:save'
-
+    after 'deploy:publishing', 'deploy:commit:save'
 
 ## Contributing
 
