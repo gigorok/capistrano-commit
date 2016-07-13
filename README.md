@@ -2,11 +2,14 @@
 
 Save information about deployed revisions into database.
 
+Each time after deploying of your application through capistrano (3+) - [host, revision, timestamps] will be stored
+into table capistrano_commits.
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-commit', github: 'gigorok/capistrano-commit'
+    gem 'capistrano-commit'
 
 And then execute:
 
@@ -25,6 +28,11 @@ Add below to Capfile:
 and to deploy.rb:
 
     after 'deploy:publishing', 'deploy:commit:save'
+
+## TODO
+
+1. Current version control branch
+2. Config files
 
 ## Contributing
 
