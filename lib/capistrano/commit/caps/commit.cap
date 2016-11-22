@@ -1,11 +1,15 @@
 namespace :deploy do
   namespace :commit do
 
+    def capistrano_commit_roles
+      fetch(:capistrano_commit_role, :all)
+    end
+
     desc <<-DESC
       Save information about deployed revisions into database.
     DESC
     task :save do
-      on roles(fetch(:capistrano_commit_role, :app)) do |host|
+      on roles(capistrano_commit_roles) do |host|
 
         invoke 'deploy:set_current_revision'
         rev = fetch(:current_revision)
@@ -25,7 +29,7 @@ namespace :deploy do
       Show information about deployed revisions.
     DESC
     task :show do
-      on roles(fetch(:capistrano_commit_role, :app)) do |host|
+      on roles(capistrano_commit_roles) do |host|
 
         invoke 'deploy:set_current_revision'
         rev = fetch(:current_revision)
